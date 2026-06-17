@@ -7,7 +7,9 @@
     "dev": "next dev --turbopack --disable-source-maps",
     "dev:stable": "next dev --webpack --disable-source-maps",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -93,13 +95,17 @@
     "picomatch": "2.3.2"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.2.3",
+    "jest": "^30.4.2",
+    "mongodb-memory-server": "^11.2.0",
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
+    "ts-jest": "^29.4.11",
     "typescript": "^5"
   }
 }
