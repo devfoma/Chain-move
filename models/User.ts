@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const NotificationSchema = new mongoose.Schema(
   {
@@ -31,7 +31,7 @@ const NotificationSchema = new mongoose.Schema(
     },
   },
   { _id: false },
-)
+);
 
 const UserSchema = new mongoose.Schema(
   {
@@ -118,7 +118,14 @@ const UserSchema = new mongoose.Schema(
     },
     kycStatus: {
       type: String,
-      enum: ["none", "pending", "approved_stage1", "pending_stage2", "approved_stage2", "rejected"],
+      enum: [
+        "none",
+        "pending",
+        "approved_stage1",
+        "pending_stage2",
+        "approved_stage2",
+        "rejected",
+      ],
       default: "none",
       index: true,
     },
@@ -137,7 +144,14 @@ const UserSchema = new mongoose.Schema(
     },
     physicalMeetingStatus: {
       type: String,
-      enum: ["none", "scheduled", "approved", "rescheduled", "completed", "rejected_stage2"],
+      enum: [
+        "none",
+        "scheduled",
+        "approved",
+        "rescheduled",
+        "completed",
+        "rejected_stage2",
+      ],
       default: "none",
       index: true,
     },
@@ -153,8 +167,27 @@ const UserSchema = new mongoose.Schema(
       type: [NotificationSchema],
       default: [],
     },
+    stellarPublicKey: {
+      type: String,
+      sparse: true,
+      trim: true,
+      index: true,
+    },
+    stellarAccountType: {
+      type: String,
+      enum: ["external_wallet", "platform_managed", "unknown"],
+      default: "unknown",
+    },
+    stellarLinkedAt: {
+      type: Date,
+      default: null,
+    },
+    stellarLastSyncedAt: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true },
-)
+);
 
-export default mongoose.models.User || mongoose.model("User", UserSchema)
+export default mongoose.models.User || mongoose.model("User", UserSchema);
