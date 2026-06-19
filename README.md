@@ -145,7 +145,11 @@ npm run dev
 - `PAYSTACK_SECRET_KEY` is required for wallet funding flows.
 - `PAYSTACK_DVA_PREFERRED_BANK` optionally overrides the bank slug used when provisioning Paystack dedicated virtual accounts. For test keys, the app defaults to `test-bank`.
 - `RESEND_API_KEY` is only needed for email features.
-- Stellar variables are not required by the current code yet. The expected integration pass should introduce explicit values such as `STELLAR_NETWORK`, `STELLAR_HORIZON_URL`, `STELLAR_RPC_URL`, issuer account public keys, distribution account public keys, and contract IDs.
+- Stellar configuration is centralized in `lib/stellar/config.ts`. For local UI development, set `ENABLE_MOCK_STELLAR=true`; missing or placeholder deployment identifiers are then accepted.
+- With mock mode disabled, `STELLAR_ISSUER_PUBLIC_KEY`, `STELLAR_DISTRIBUTION_PUBLIC_KEY`, and `STELLAR_CONTRACT_ID` are required and validated. `STELLAR_NETWORK` accepts `testnet` or `mainnet`.
+- Testnet defaults are `https://horizon-testnet.stellar.org`, `https://soroban-testnet.stellar.org`, and the `CMOVE` asset code. These can be overridden with the variables in `.env.example`.
+- This configuration contains public keys and service URLs only. Stellar private/secret keys must never be added to environment examples, committed, or required by this layer.
+- Future mainnet deployments use the same variables with `STELLAR_NETWORK=mainnet`; mainnet Horizon, RPC, and network passphrase defaults are selected automatically.
 
 ## Driver Dedicated Repayment Accounts
 
