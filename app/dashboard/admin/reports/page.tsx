@@ -164,6 +164,15 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
   const fundedPools = Number(poolSummary.find((entry: any) => String(entry._id).toUpperCase() === "FUNDED")?.count || 0)
   const activePools = openPools + fundedPools
 
+  if (tab === "users") {
+    const uQuery: Record<string, unknown> = { ...userDateMatch }
+    if (["driver", "investor", "admin"].includes(roleFilter)) uQuery.role = roleFilter
+    ;[userRoleCounts, recentUsers] = await Promise.all([
+      User.aggregate([{ $group: { _id: "$role", count: { $sum: 1 } } }]),
+      User.find(uQuery).select("name fullName email role kycVerified createdAt").sort({ createdAt: -1 }).limit(15).lean(),
+    ])
+  }
+
   if (tab === "fleet") {
     const vQuery: Record<string, unknown> = {}
     if (["Available", "Financed", "Reserved", "Maintenance", "Retired"].includes(vehicleStatusFilter)) vQuery.status = vehicleStatusFilter
