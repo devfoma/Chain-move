@@ -164,6 +164,15 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
   const fundedPools = Number(poolSummary.find((entry: any) => String(entry._id).toUpperCase() === "FUNDED")?.count || 0)
   const activePools = openPools + fundedPools
 
+  if (tab === "kyc") {
+    const kycQuery: Record<string, unknown> = { kycStatus: { $nin: ["none", null] } }
+    if (["pending", "approved", "rejected"].includes(kycStatusFilter)) kycQuery.kycStatus = kycStatusFilter
+    ;[kycStatusCounts, recentKyc] = await Promise.all([
+      User.aggregate([{ $match: { kycStatus: { $nin: ["none", null] } } }, { $group: { _id: "$kycStatus", count: { $sum: 1 } } }]),
+      User.find(kycQuery).select("name fullName email role kycStatus kycVerified createdAt").sort({ createdAt: -1 }).limit(15).lean(),
+    ])
+  }
+
   const exportQuery = new URLSearchParams()
   exportQuery.set("range", range)
   if (range === "custom") {
