@@ -220,34 +220,21 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
         title="Reports"
         subtitle="Platform reporting hub and exports."
         actions={
-          <form action="/dashboard/admin/reports" className="flex flex-wrap items-center gap-2">
-            <select
-              name="range"
-              defaultValue={range}
-              className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-            >
-              <option value="7d">Last 7 days</option>
-              <option value="30d">Last 30 days</option>
-              <option value="90d">Last 90 days</option>
-              <option value="all">All time</option>
-              <option value="custom">Custom range</option>
-            </select>
-            <input
-              type="date"
-              name="from"
-              defaultValue={from}
-              className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-            />
-            <input
-              type="date"
-              name="to"
-              defaultValue={to}
-              className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground"
-            />
-            <Button type="submit" variant="outline" className="h-9">
-              Apply
-            </Button>
-          </form>
+          <div className="flex flex-wrap items-center gap-2 print:hidden">
+            <form action="/dashboard/admin/reports" className="flex flex-wrap items-center gap-2">
+              <input type="hidden" name="tab" value={tab} />
+              <select name="range" defaultValue={range} className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground">
+                <option value="7d">Last 7 days</option>
+                <option value="30d">Last 30 days</option>
+                <option value="90d">Last 90 days</option>
+                <option value="all">All time</option>
+                <option value="custom">Custom range</option>
+              </select>
+              <input type="date" name="from" defaultValue={from} className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground" />
+              <input type="date" name="to" defaultValue={to} className="h-9 rounded-md border border-input bg-background px-3 text-sm text-foreground" />
+              <Button type="submit" variant="outline" className="h-9">Apply</Button>
+            </form>
+          </div>
         }
       />
 
