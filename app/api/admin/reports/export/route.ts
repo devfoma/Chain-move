@@ -97,7 +97,7 @@ export async function GET(request: Request) {
 
     const { searchParams } = new URL(request.url)
     const type = (searchParams.get("type") || "deposits") as ExportType
-    if (!["deposits", "investments", "repayments"].includes(type)) {
+    if (!["deposits", "investments", "repayments", "kyc", "fleet", "users"].includes(type)) {
       return NextResponse.json({ message: "Invalid export type" }, { status: 400 })
     }
 
