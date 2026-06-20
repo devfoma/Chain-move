@@ -12,6 +12,8 @@ import InvestmentPool from "@/models/InvestmentPool"
 import InvestorCredit from "@/models/InvestorCredit"
 import PoolInvestment from "@/models/PoolInvestment"
 import Transaction from "@/models/Transaction"
+import User from "@/models/User"
+import Vehicle from "@/models/Vehicle"
 import { requireAdminAccess } from "@/src/server/admin/require-admin"
 
 export const dynamic = "force-dynamic"
