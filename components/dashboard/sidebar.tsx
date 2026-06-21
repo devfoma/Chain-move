@@ -10,6 +10,7 @@ import {
   Coins,
   Compass,
   FileText,
+  Gauge,
   Layers,
   LayoutDashboard,
   LogOut,
@@ -83,7 +84,10 @@ const SIDEBAR_SECTIONS: Record<DashboardRole, SidebarSectionConfig[]> = {
       id: "investor-finances",
       label: "Finances",
       defaultExpanded: true,
-      items: [{ label: "My Wallet", href: "/dashboard/investor/wallet", icon: Wallet }],
+      items: [
+        { label: "My Wallet", href: "/dashboard/investor/wallet", icon: Wallet },
+        { label: "Transaction Ledger", href: "/dashboard/investor/ledger", icon: Receipt },
+      ],
     },
     {
       id: "investor-account",
@@ -110,6 +114,7 @@ const SIDEBAR_SECTIONS: Record<DashboardRole, SidebarSectionConfig[]> = {
         { label: "My Vehicle / Contract", href: "/dashboard/driver/contract", icon: Calendar },
         { label: "Make Payment", href: "/dashboard/driver/repayment", icon: Wallet },
         { label: "Payment History", href: "/dashboard/driver/payments", icon: Receipt },
+        { label: "Transaction Ledger", href: "/dashboard/driver/ledger", icon: Receipt },
       ],
     },
     {
@@ -138,6 +143,7 @@ const SIDEBAR_SECTIONS: Record<DashboardRole, SidebarSectionConfig[]> = {
         { label: "Investors", href: "/dashboard/admin/investors", icon: Coins },
         { label: "Drivers", href: "/dashboard/admin/drivers", icon: Car },
         { label: "Vehicles", href: "/dashboard/admin/vehicles", icon: Car },
+        { label: "Fleet Operations", href: "/dashboard/admin/fleet-operations", icon: Gauge },
       ],
     },
     {
@@ -146,6 +152,7 @@ const SIDEBAR_SECTIONS: Record<DashboardRole, SidebarSectionConfig[]> = {
       defaultExpanded: true,
       items: [
         { label: "Reports", href: "/dashboard/admin/reports", icon: FileText },
+        { label: "Transaction Ledger", href: "/dashboard/admin/ledger", icon: Receipt },
         { label: "Issues", href: "/dashboard/admin/issues", icon: ShieldAlert },
         { label: "Governance", href: "/dashboard/admin/governance", icon: Vote },
       ],
